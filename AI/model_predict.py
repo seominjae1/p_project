@@ -17,11 +17,11 @@ def get_db_connection():
     # 데이터베이스 연결 함수
     return pymysql.connect(
         host="localhost",
-        user="root",
-        password="p202035140",
-        database="ai_news_validator",
+        user="dbid233",
+        password="dbpass233",
+        database="db24327",
         charset="utf8mb4",
-        port=3307,
+        port=3306,
         cursorclass=pymysql.cursors.DictCursor,
     )
 
