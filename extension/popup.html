@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>가짜뉴스 피하자</title>
+  <style>
+      .completed-container {
+    display: none;
+    }
+  
+   .completed-container p {
+    text-align: left;
+  } 
+  .loading-container {
+    position: fixed;             /* 화면에 고정된 위치 */
+    top: 50%;                    /* 화면 중앙 수직 위치 */
+    left: 50%;                   /* 화면 중앙 수평 위치 */
+    transform: translate(-50%, -50%); /* 정확한 중앙 정렬 */
+    display: flex;               /* Flexbox 레이아웃을 사용 */
+    justify-content: center;     /* 수평 중앙 정렬 */
+    align-items: center;         /* 수직 중앙 정렬 */
+    width: 100px;                /* 고정된 크기 */
+    height: 100px;               /* 고정된 크기 */
+    z-index: 9999;               /* 다른 요소들 위에 표시되도록 설정 */
+    background-color: rgba(255, 255, 255, 0.8); /* 배경을 약간 투명하게 설정 (옵션) */
+  }
+  .loader {
+  border: 5px solid #f3f3f3;      /* 회색 */
+  border-top: 5px solid #3498db;  /* 파란색 */
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  animation: spin 1s linear infinite;
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    .tab-menu {
+      display: flex;
+      justify-content: center;
+      background-color: #f8f8f8;
+      border-bottom: 1px solid #ddd;
+    }
+    .tab-menu button {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      background-color: #f8f8f8;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .tab-menu button.active {
+      background-color: #007bff;
+      color: white;
+    }
+    .tab-content {
+      display: none;
+      padding: 20px;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    #headlineNewsDisplay {
+      margin-top: 20px;
+      text-align: left;
+    }
+    #headlineNewsDisplay div {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
+    #headlineNewsDisplay a {
+      text-decoration: none;
+      color: blue;
+      flex: 1;
+    }
+    canvas {
+      margin-left: 10px;
+    }
+    body {
+      width: 450px;
+      height: 600px;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <h1>가짜뉴스 피하자</h1>
+  <div style="text-align: right;">
+    <a href="#" id="redirectButton" style="font-size: 14px;">
+      사용자 가이드
+    </a>
+  </div>
+  <div class="tab-menu">
+    <button id="main-tab" class="active">메인</button>
+    <button id="headline-tab">헤드라인</button>
+  </div>
+
+  <div id="main-content" class="tab-content active">
+    <button id="get-url-btn">Analyze</button>
+    <div class="loading-container" id="loadingContainer" style="display: none">
+      <div class="loader"></div>
+      <p>Loading... please wait</p>
+    </div>
+    <div class="completed-container" id="completedContainer" style="display:none">
+      <div id="titleDisplay" style="margin-top: 20px;"></div>
+      <div id="contentDisplay"></div>
+      <div id="errorDisplay" style="color: red; margin-top: 20px;"></div>
+      <canvas id="myPieChart" width="400" height="400"></canvas>
+
+        <!-- 연관기사           출력 -->
+    <h3 style="text-align: left;">같이보면 좋은뉴스</h3>
+    <div id="similarArticles"></div>
+
+    </div>
+  </div>
+
+  <div id="headline-content" class="tab-content">
+    <h2>헤드라인 뉴스</h2>
+    <label for="news-select">언론사 선택:</label>
+    <select id="news-select">
+      <option value="">언론사를 선택하세요</option>
+      <option value="SBS">SBS</option>
+      <option value="KBS">KBS</option>
+      <option value="JTBC">JTBC</option>
+      <option value="국민일보">국민일보</option>
+      <option value="아시아경제">아시아경제</option>
+    </select>
+    <div id="headlineNewsDisplay">언론사를 선택하면 기사가 여기에 표시됩니다.</div>
+  </div>
+
+  <script src="js/chart.umd.js"></script>
+  <script src="popup.js"></script>
+
+  
+
+
+</body>
+</html>
+
